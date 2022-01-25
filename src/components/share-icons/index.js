@@ -14,7 +14,7 @@ placeholder.class = "placeholder";
 const SHARE_ICONS = "SHARE_ICONS";
 
 const getDataFromLocalStorage = () => {
-    const icons = JSON.parse(window.localStorage.getItem(SHARE_ICONS));
+    const icons = JSON.parse(window.localStorage.getItem(SHARE_ICONS)) || [];
     return icons.map(icon => ({...icon, icon: getShareIcon(icon.name, icon.link)}))
 }
 

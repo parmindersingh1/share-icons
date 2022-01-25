@@ -12,6 +12,7 @@ const placeholder = document.createElement("a");
 placeholder.class = "placeholder";
 
 const SHARE_ICONS = "SHARE_ICONS";
+const link = window.location.origin;
 
 const getDataFromLocalStorage = () => {
     const icons = JSON.parse(window.localStorage.getItem(SHARE_ICONS)) || [];
@@ -33,7 +34,7 @@ const ShareIcon = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [error, setError] = useState("");
     const [name, setName] = useState("");
-    const [link, setLink] = useState("");
+    // const [link, setLink] = useState("");
     const [iconClass, setIconClass] = useState("");
 
     console.log("ITEMS: ", items)
@@ -54,7 +55,7 @@ const ShareIcon = () => {
 
     const setToDefault = () => {
         setName("");
-        setLink("");
+        // setLink("");
         setIconClass("");
     }
 
@@ -64,8 +65,8 @@ const ShareIcon = () => {
 
     const saveData = () => {
         console.log(name, link);
-        if (!name || !link) {
-            setError("name and url are required");
+        if (!name) {
+            setError("name is required");
             return
         }
 
@@ -118,7 +119,7 @@ const ShareIcon = () => {
                     />
                
                 <a class={`${style['s-item']} cursor-pointer bg-green-600`} onClick={() => showModal()}>
-                    <span class="fa fa-plus"></span>
+                    <span class="fa fa-ellipsis-h"></span>
                 </a>
                 <a class={`${style['s-item']} ${style.print} cursor-pointer ${style['so-close']}`} onClick={() => setIsCollapsed(true)}>
                     <span class="fa fa-arrow-left"></span>
@@ -167,16 +168,6 @@ const ShareIcon = () => {
 
                             </span>
                         ))}
-                        <div class="mt-2">
-                            <label class="block">
-                                <span class="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-                                    Url
-                                </span>
-                                <input type="text" name="link" 
-                                class="mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1" 
-                                placeholder="url..." value={link} onChange={(e) => setLink(e.target.value)}/>
-                            </label>
-                        </div>
                     </div>
 
                 

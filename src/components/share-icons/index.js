@@ -11,39 +11,23 @@ import { allIcons, getShareIcon } from './icons';
 const placeholder = document.createElement("a");
 placeholder.class = "placeholder";
 
+const SHARE_ICONS = "SHARE_ICONS";
+
+const getDataFromLocalStorage = () => {
+    const icons = JSON.parse(window.localStorage.getItem(SHARE_ICONS));
+    return icons.map(icon => ({...icon, icon: getShareIcon(icon.name, icon.link)}))
+}
+
+const saveDataToLocalStorage = (items) => {
+    // const copyItems = JSON.parse(JSON.stringify(items));
+    return window.localStorage.setItem(SHARE_ICONS, JSON.stringify(items.map(i => ({
+        id: i.id,
+        name: i.name,
+        link: i.link
+    }))));
+}
 const ShareIcon = () => {
-    const [items, setItems] = useState([
-        // {
-        //     id: 1,
-        //     name: "facebook",
-        //     link: "/",
-        //     iconClass:"fa-facebook"
-        // },
-        // {
-        //     id: 2,
-        //     name: "twitter",
-        //     link: "/",
-        //     iconClass:"fa-twitter"
-        // },
-        // {
-        //     id: 3,
-        //     name: "pinterest",
-        //     link: "/",
-        //     iconClass:"fa-pinterest"
-        // },
-        // {
-        //     id: 4,
-        //     name: "linkedin",
-        //     link: "/",
-        //     iconClass:"fa-linkedin"
-        // },
-        // {
-        //     id: 5,
-        //     name: "instagram",
-        //     link: "/",
-        //     iconClass:"fa-instagram"
-        // }
-    ]);
+    const [items, setItems] = useState(getDataFromLocalStorage() || []);
 
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -51,6 +35,8 @@ const ShareIcon = () => {
     const [name, setName] = useState("");
     const [link, setLink] = useState("");
     const [iconClass, setIconClass] = useState("");
+
+    console.log("ITEMS: ", items)
 
     const handleRLDDChange = (newItems) => {
         setItems(newItems);
@@ -86,26 +72,25 @@ const ShareIcon = () => {
         setError("");
         const lastId = items.length > 0 ? items[items.length-1].id: 0
         const newId = lastId + 1;
-        setItems([...items, {
+        const newItems = [...items, {
             id: newId,
             name: name,
             link: link,
             icon: getShareIcon(name, link)
-        }]);
+        }];
+        setItems(newItems);
+
+        console.log("newItems", newItems)
+
+        saveDataToLocalStorage(newItems)
 
         closeModal();
     }
 
     const removeIcon = (icon) => {
-        setItems(items.filter(item => item.name !== icon.name));
-    }
-
-    const handleLinkClick = (href) => {
-        const width = 548;
-        const height = 325;
-        const left = (window.screen.width / 2) - ((width / 2) + 10);
-        const top = (window.screen.height / 2) - ((height / 2) + 50);
-        window.open(href, 'sharer', `toolbar=0,status=0,width=548,height=325,left=${left},top=${top}`);
+        const newItems = items.filter(item => item.name !== icon.name);
+        setItems(newItems);
+        saveDataToLocalStorage(newItems)
     }
     
 	return (

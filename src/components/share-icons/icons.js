@@ -87,14 +87,14 @@ export const getShareIcon = (name, shareUrl) => {
           <FacebookIcon size={60} />
         </FacebookShareButton>
 
-        <div>
+        {/* <div>
           <FacebookShareCount
             url={shareUrl}
             className="Demo__some-network__share-count"
           >
             {(count) => count}
           </FacebookShareCount>
-        </div>
+        </div> */}
       </div>
     );
   } else if (name === "facebook-messenger") {
@@ -174,12 +174,12 @@ export const getShareIcon = (name, shareUrl) => {
           <PinterestIcon size={60} />
         </PinterestShareButton>
 
-        <div>
+        {/* <div>
           <PinterestShareCount
             url={shareUrl}
             className="Demo__some-network__share-count"
           />
-        </div>
+        </div> */}
       </div>
     );
   } else if (name === "vk") {
@@ -252,12 +252,12 @@ export const getShareIcon = (name, shareUrl) => {
           <TumblrIcon size={60} />
         </TumblrShareButton>
 
-        <div>
+        {/* <div>
           <TumblrShareCount
             url={shareUrl}
             className="Demo__some-network__share-count"
           />
-        </div>
+        </div> */}
       </div>
     );
   } else if (name === "live-journal") {
@@ -384,12 +384,12 @@ export const getShareIcon = (name, shareUrl) => {
           <HatenaIcon size={60} />
         </HatenaShareButton>
 
-        <div>
+        {/* <div>
           <HatenaShareCount
             url={shareUrl}
             className="Demo__some-network__share-count"
           />
-        </div>
+        </div> */}
       </div>
     );
   }

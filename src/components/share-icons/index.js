@@ -15,7 +15,32 @@ const SHARE_ICONS = "SHARE_ICONS";
 const link = window.location.origin;
 
 const getDataFromLocalStorage = () => {
-    const icons = JSON.parse(window.localStorage.getItem(SHARE_ICONS)) || [];
+    const icons = JSON.parse(window.localStorage.getItem(SHARE_ICONS)) || [
+            {   
+                id: 1,
+                name: "facebook",
+                link: link,
+                icon: getShareIcon("facebook", link)
+            },
+            {   
+                id: 2,
+                name: "twitter",
+                link: link,
+                icon: getShareIcon("twitter", link)
+            },
+            {   
+                id: 3,
+                name: "linkedin",
+                link: link,
+                icon: getShareIcon("linkedin", link)
+            },
+            {   
+                id: 4,
+                name: "pinterest",
+                link: link,
+                icon: getShareIcon("pinterest", link)
+            }
+        ];
     return icons.map(icon => ({...icon, icon: getShareIcon(icon.name, icon.link)}))
 }
 

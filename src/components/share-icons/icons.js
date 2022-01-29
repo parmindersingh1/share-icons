@@ -118,7 +118,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           title={name}
           className="Demo__some-network__share-button"
         >
-          <TwitterIcon size={size} />
+          <TwitterIcon size={size} /> 
         </TwitterShareButton>
 
         {/* <div className="Demo__some-network__share-count">&nbsp;</div> */}

@@ -1,15 +1,15 @@
 .s-soft {
   position: fixed;
-  top: 100px;
-  left: 10;
+  /* top: 100px; */
+  /* left: 15px; */
   z-index: 1000;
   transition: all linear 0.4s;
 }
 .s-soft a:first-child {
-  border-radius: 0 5px 0 0;
+  /* border-radius: 0 5px 0 0; */
 }
 .s-soft a:last-child {
-  border-radius: 0 0 5px 0;
+  /* border-radius: 0 0 5px 0; */
 }
 .s-item {
   display: block;
@@ -22,16 +22,16 @@
   transition: all linear 0.4s;
 }
 .s-item:hover {
-  width: 110px;
-  border-radius: 0px 20px 20px 0px;
+  width: 70px;
+  /* border-radius: 0px 20px 20px 0px; */
 }
-.so-open {
+/* .so-open {
   position: fixed;
   top: 100px;
-  left: -90px;
-  border-radius: 0 30px 30px 0;
-  transition: all linear 0.4s;
-}
+  /* left: -90px; */
+  /* border-radius: 0 30px 30px 0; */
+  /* transition: all linear 0.4s; */
+/*} */
 .so-close {
   transition: all linear 0.4s;
 }
@@ -107,14 +107,87 @@
 }
 
 .so-collapse {
-  left: -60px;
+  /* left: -60px; */
   transition: all linear 0.4s;
 }
 
-.left-0 {
+/* .left-0 {
   left: 0px !important;
-}
+} */
 
 #dropdown {
   transition: all linear 0.4s;
 }
+
+/* Dropdown Button */
+   
+   
+   /* The container <div> - needed to position the dropdown content */
+   /* .dropdown {
+    position: relative;
+    display: inline-block;
+ } */
+ 
+ /* Dropdown Content (Hidden by Default) */
+ .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 60px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    height: 300px;
+    overflow-y: scroll;
+ }
+ 
+ /* Links inside the dropdown */
+ .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+ }
+ 
+ /* Change color of dropdown links on hover */
+ .dropdown-content a:hover {background-color: #ddd;}
+ 
+ /* Show the dropdown menu on hover */
+ .dropdown:hover .dropdown-content {display: block;}
+ .dropdown:hover .dropup-content {display: block;}
+ 
+
+
+
+ /* Dropup Button */
+ 
+ 
+ /* The container <div> - needed to position the dropup content */
+ /* .dropup {
+    position: relative;
+    display: inline-block;
+ } */
+ 
+ /* Dropup content (Hidden by Default) */
+ .dropup-content {
+    display: none;
+    position: absolute;
+    bottom: 60px;
+    background-color: #f1f1f1;
+    min-width: 60px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    height: 300px;
+    overflow-y: scroll;
+ }
+ 
+ /* Links inside the dropup */
+ .dropup-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+ }
+ 
+ /* Change color of dropup links on hover */
+ .dropup-content a:hover {background-color: #ddd}
+

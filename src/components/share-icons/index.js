@@ -1,10 +1,10 @@
-import { h } from 'preact';
-import { useState } from 'preact/hooks';
+import { getAllIcons, getShareIcon } from "./icons";
 
-import { Link } from 'preact-router/match';
-import style from './style.css';
-import RLDD from 'react-list-drag-and-drop/lib/RLDD';
-import { allIcons, getShareIcon } from './icons';
+import { Link } from "preact-router/match";
+import RLDD from "react-list-drag-and-drop/lib/RLDD";
+import { h } from "preact";
+import style from "./style.css";
+import { useState } from "preact/hooks";
 
 //ref https://codepen.io/volitilov/pen/gxvyRX
 
@@ -14,196 +14,137 @@ placeholder.class = "placeholder";
 const SHARE_ICONS = "SHARE_ICONS";
 const link = window.location.origin;
 
-const getDataFromLocalStorage = () => {
-    const icons = JSON.parse(window.localStorage.getItem(SHARE_ICONS)) || [
-            {   
-                id: 1,
-                name: "facebook",
-                link: link,
-                icon: getShareIcon("facebook", link)
-            },
-            {   
-                id: 2,
-                name: "twitter",
-                link: link,
-                icon: getShareIcon("twitter", link)
-            },
-            {   
-                id: 3,
-                name: "linkedin",
-                link: link,
-                icon: getShareIcon("linkedin", link)
-            },
-            {   
-                id: 4,
-                name: "pinterest",
-                link: link,
-                icon: getShareIcon("pinterest", link)
-            }
-        ];
-    return icons.map(icon => ({...icon, icon: getShareIcon(icon.name, icon.link)}))
-}
+const getFirstFourElements = () => {
+  const allIcons = getAllIcons();
+  const icons = allIcons.slice(0, 4);
+  return icons.map((icon, i) => ({
+    ...icon,
+    id: i + 1,
+    link: link,
+    icon: getShareIcon(icon.name, icon.link, 55),
+  }));
+};
 
-const saveDataToLocalStorage = (items) => {
-    // const copyItems = JSON.parse(JSON.stringify(items));
-    return window.localStorage.setItem(SHARE_ICONS, JSON.stringify(items.map(i => ({
-        id: i.id,
-        name: i.name,
-        link: i.link
-    }))));
-}
+const getRemainingElements = () => {
+  const allIcons = getAllIcons(20);
+  const icons = allIcons.slice(4, allIcons.length);
+  return icons.map((icon, i) => ({
+    ...icon,
+    id: i + 4,
+    link: link,
+    icon: getShareIcon(icon.name, icon.link, 20),
+  }));
+};
+
 const ShareIcon = () => {
-    const [items, setItems] = useState(getDataFromLocalStorage() || []);
+  const [items, setItems] = useState(getFirstFourElements() || []);
+  const [dropdownItems, setDropdownItems] = useState(
+    getRemainingElements() || []
+  );
+  const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
 
-    const [isCollapsed, setIsCollapsed] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [error, setError] = useState("");
-    const [name, setName] = useState("");
-    // const [link, setLink] = useState("");
-    const [iconClass, setIconClass] = useState("");
+  const [isCollapsed, setIsCollapsed] = useState(false);
 
-    console.log("ITEMS: ", items)
+  console.log("ITEMS: ", items);
 
-    const handleRLDDChange = (newItems) => {
-        setItems(newItems);
-    }
+  const handleRLDDChange = (newItems) => {
+    setItems(newItems);
+  };
 
-    const showModal = () => {
-        setIsModalOpen(true);
-        setToDefault();
-    }
+  const showDropdownPopover = () => {
+    setDropdownPopoverShow(true);
+  };
 
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setToDefault();
-    }
+  const closeDropdownPopover = () => {
+    // setDropdownPopoverShow(false);
+  };
 
-    const setToDefault = () => {
-        setName("");
-        // setLink("");
-        setIconClass("");
-    }
-
-    const isAlreadySelected = (icon) => {
-        return (items.map(i => i.name)).includes(icon.name)
-    }
-
-    const saveData = () => {
-        console.log(name, link);
-        if (!name) {
-            setError("name is required");
-            return
-        }
-
-        setError("");
-        const lastId = items.length > 0 ? items[items.length-1].id: 0
-        const newId = lastId + 1;
-        const newItems = [...items, {
-            id: newId,
-            name: name,
-            link: link,
-            icon: getShareIcon(name, link)
-        }];
-        setItems(newItems);
-
-        console.log("newItems", newItems)
-
-        saveDataToLocalStorage(newItems)
-
-        closeModal();
-    }
-
-    const removeIcon = (icon) => {
-        const newItems = items.filter(item => item.name !== icon.name);
-        setItems(newItems);
-        saveDataToLocalStorage(newItems)
-    }
-    
-	return (
-        <>
-            <div class={`${style['s-soft']} ${isCollapsed ? style['so-collapse']: ''}`}>
-                {/* {items.map((item, index) => (
+  return (
+    <>
+      <div
+        class={`${style["s-soft"]} ${isCollapsed ? style["so-collapse"] : ""}`}
+      >
+        {/* {items.map((item, index) => (
                     <a href={item.link} class={`${style['s-item']} ${style[item.name]}`} id={ index }
                         key={ index }>
                         <span class={`fab ${item.iconClass}`}></span>
                     </a>
                 ))} */}
 
-                    <RLDD
-                        items={items}
-                        itemRenderer={(item) => {
-                            return (
-                                <div class={`${style['s-item']} ${style[item.name]} cursor-pointer`} target="_blank">
-                                    {/* <span class={`fab ${item.iconClass}`}></span> */}
-                                    { item.icon}
-                                </div>
-                               
-                            );
-                        }}
-                        onChange={handleRLDDChange}
-                    />
-               
-                <a class={`${style['s-item']} cursor-pointer bg-green-600`} onClick={() => showModal()}>
-                    <span class="fa fa-ellipsis-h"></span>
+        <RLDD
+          items={items}
+          itemRenderer={(item) => {
+            return (
+              <div
+                class={`${style["s-item"]} ${style[item.name]} cursor-pointer`}
+                target="_blank"
+              >
+                {/* <span class={`fab ${item.iconClass}`}></span> */}
+                {item.icon}
+              </div>
+            );
+          }}
+          onChange={handleRLDDChange}
+        />
+
+        <a
+          class={`${style["s-item"]} ${style.print} cursor-pointer ${style["so-close"]}`}
+          onClick={() => setIsCollapsed(true)}
+        >
+          <span class="fa fa-arrow-left"></span>
+        </a>
+
+        <div onMouseLeave={() => closeDropdownPopover()}>
+          <a
+            class={`${style["s-item"]} cursor-pointer bg-green-600`}
+            onMouseEnter={() => showDropdownPopover()}
+          >
+            <span class="fa fa-ellipsis-h"></span>
+          </a>
+
+          {/* (dropdownPopoverShow ? "block " : "hidden ")  */}
+          <div
+            id="dropdown"
+            class={
+              (dropdownPopoverShow ? "block " : "hidden ") +
+              " z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 overflow-y-scroll h-80"
+            }
+          >
+            <ul class="py-1" aria-labelledby="dropdownButton">
+              {/* <li>
+                <a
+                  href="#"
+                  class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  Dashboard
                 </a>
-                <a class={`${style['s-item']} ${style.print} cursor-pointer ${style['so-close']}`} onClick={() => setIsCollapsed(true)}>
-                    <span class="fa fa-arrow-left"></span>
-                </a>
-            </div>
-            <a class={`${style['s-item']} ${style.print} ${style['so-open']} cursor-pointer ${isCollapsed ? style['left-0']: '-left-60'}`} onClick={() => setIsCollapsed(false)}>
-                <span class="fa fa-arrow-right"></span>
-            </a>
-
-            <div id="modal" class={`fixed ${isModalOpen ? "" : "hidden"} z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4`}>
-                <div class="relative top-40 mx-auto shadow-lg rounded-md bg-white w-2/3">
-
-                
-                    <div class="flex justify-between items-center bg-green-500 text-white text-xl rounded-t-md px-4 py-2">
-                        <h3>Add Social Icon</h3>
-                        <button onClick={() => closeModal()}>x</button>
-                    </div>
-
-                
-                    <div class="max-h-100 overflow-y-scroll p-4">
-                        {error && (
-                        <div class="flex justify-center items-center m-1 font-medium py-1 px-2 bg-white rounded-md text-red-700 bg-red-100 border border-red-300 ">
-                            <div class="text-xl font-normal  max-w-full flex-initial">
-                                {error}
-                            </div>
-                        </div>
-                        )}
-
-
-                        {allIcons.map(icon => (
-                            <span class={` inline-block p-2 m-2 text-white relative`} key={icon.name}>
-                               
-                                <input type="radio" name="name" value={icon.name} class="default:ring-2 absolute top-2 left-2" 
-                                    defaultChecked={name === icon.name}
-                                    disabled={isAlreadySelected(icon)} 
-                                    onChange={(e) => {
-                                        setName(e.target.value)
-                                        setIconClass(icon.iconClass);
-                                    }}/>
-                                {/* <i class={`fab ${icon.iconClass} fa-2x`}></i>  */}
-                                {icon.icon}
-                                {isAlreadySelected(icon) && (
-                                 <i class={`fas fa-times cursor-pointer absolute -top-2 -right-1 w-5 h-5  rounded-full flex justify-center items-center text-center p-3 bg-black`} onClick={() => removeIcon(icon)}></i> 
-                                )}
-
-
-                            </span>
-                        ))}
-                    </div>
-
-                
-                    <div class="px-4 py-2 border-t border-t-gray-500 flex justify-end items-center space-x-4">
-                        <button class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition" onClick={() => saveData()}>Save</button>
-                    </div>
-                </div>
-            </div>
-
-        </>
-    );
-}
+              </li> */}
+              {dropdownItems.map((di, i) => (
+                <li>
+                  <div
+                    class={`flex cursor-pointer block py-0.5 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white`}
+                    target="_blank"
+                  >
+                    {/* <span class={`fab ${item.iconClass}`}></span> */}
+                    {di.icon} 
+                    <span class="flex-1 ml-2">{di.name}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <a
+          class={`${style["s-item"]} ${style.print} ${
+            style["so-open"]
+          } cursor-pointer ${isCollapsed ? style["left-0"] : "-left-60"}`}
+          onClick={() => setIsCollapsed(false)}
+        >
+          <span class="fa fa-arrow-right"></span>
+        </a>
+      </div>
+    </>
+  );
+};
 
 export default ShareIcon;

@@ -50,33 +50,31 @@ import {
   WorkplaceShareButton,
 } from "react-share";
 
-import React from "react";
-
-export const getAllIcons = (size = 40) => [
-  { name: "facebook", icon: <FacebookIcon size={size} /> },
-  { name: "twitter", icon: <TwitterIcon size={size} /> },
-  { name: "linkedin", icon: <LinkedinIcon size={size} /> },
-  { name: "pinterest", icon: <PinterestIcon size={size} /> },
-  { name: "facebook-messenger", icon: <FacebookMessengerIcon size={size} /> },
-  { name: "telegram", icon: <TelegramIcon size={size} /> },
-  { name: "whatsapp", icon: <WhatsappIcon size={size} /> },
-  { name: "vk", icon: <VKIcon size={size} /> },
-  { name: "ok", icon: <OKIcon size={size} /> },
-  { name: "reddit", icon: <RedditIcon size={size} /> },
-  { name: "tumblr", icon: <TumblrIcon size={size} /> },
-  { name: "live-journal", icon: <LivejournalIcon size={size} /> },
-  { name: "mailru", icon: <MailruIcon size={size} /> },
-  { name: "email", icon: <EmailIcon size={size} /> },
-  { name: "viber", icon: <ViberIcon size={size} /> },
-  { name: "workplace", icon: <WorkplaceIcon size={size} /> },
-  { name: "line", icon: <LineIcon size={size} /> },
-  { name: "weibo", icon: <WeiboIcon size={size} /> },
-  { name: "pocket", icon: <PocketIcon size={size} /> },
-  { name: "instapaper", icon: <InstapaperIcon size={size} /> },
-  { name: "hatena", icon: <HatenaIcon size={size} /> },
+export const allIcons = [
+  { name: "facebook", icon: <FacebookIcon size={40} /> },
+  { name: "facebook-messenger", icon: <FacebookMessengerIcon size={40} /> },
+  { name: "twitter", icon: <TwitterIcon size={40} /> },
+  { name: "telegram", icon: <TelegramIcon size={40} /> },
+  { name: "whatsapp", icon: <WhatsappIcon size={40} /> },
+  { name: "linkedin", icon: <LinkedinIcon size={40} /> },
+  { name: "pinterest", icon: <PinterestIcon size={40} /> },
+  { name: "vk", icon: <VKIcon size={40} /> },
+  { name: "ok", icon: <OKIcon size={40} /> },
+  { name: "reddit", icon: <RedditIcon size={40} /> },
+  { name: "tumblr", icon: <TumblrIcon size={40} /> },
+  { name: "live-journal", icon: <LivejournalIcon size={40} /> },
+  { name: "mailru", icon: <MailruIcon size={40} /> },
+  { name: "email", icon: <EmailIcon size={40} /> },
+  { name: "viber", icon: <ViberIcon size={40} /> },
+  { name: "workplace", icon: <WorkplaceIcon size={40} /> },
+  { name: "line", icon: <LineIcon size={40} /> },
+  { name: "weibo", icon: <WeiboIcon size={40} /> },
+  { name: "pocket", icon: <PocketIcon size={40} /> },
+  { name: "instapaper", icon: <InstapaperIcon size={40} /> },
+  { name: "hatena", icon: <HatenaIcon size={40} /> },
 ];
 
-export const getShareIcon = (name, shareUrl, size = 64) => {
+export const getShareIcon = (name, shareUrl) => {
   if (name === "facebook") {
     return (
       <div className="Demo__some-network">
@@ -85,7 +83,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           quote={name}
           className="Demo__some-network__share-button"
         >
-          <FacebookIcon size={size} />
+          <FacebookIcon size={60} />
         </FacebookShareButton>
 
         {/* <div>
@@ -106,7 +104,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           appId="521270401588372"
           className="Demo__some-network__share-button"
         >
-          <FacebookMessengerIcon size={size} />
+          <FacebookMessengerIcon size={60} />
         </FacebookMessengerShareButton>
       </div>
     );
@@ -118,10 +116,10 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           title={name}
           className="Demo__some-network__share-button"
         >
-          <TwitterIcon size={size} />
+          <TwitterIcon size={60} />
         </TwitterShareButton>
 
-        {/* <div className="Demo__some-network__share-count">&nbsp;</div> */}
+        <div className="Demo__some-network__share-count">&nbsp;</div>
       </div>
     );
   } else if (name === "telegram") {
@@ -132,10 +130,10 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           title={name}
           className="Demo__some-network__share-button"
         >
-          <TelegramIcon size={size} />
+          <TelegramIcon size={60} />
         </TelegramShareButton>
 
-        {/* <div className="Demo__some-network__share-count">&nbsp;</div> */}
+        <div className="Demo__some-network__share-count">&nbsp;</div>
       </div>
     );
   } else if (name === "whatsapp") {
@@ -147,10 +145,10 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           separator=":: "
           className="Demo__some-network__share-button"
         >
-          <WhatsappIcon size={size} />
+          <WhatsappIcon size={60} />
         </WhatsappShareButton>
 
-        {/* <div className="Demo__some-network__share-count">&nbsp;</div> */}
+        <div className="Demo__some-network__share-count">&nbsp;</div>
       </div>
     );
   } else if (name === "linkedin") {
@@ -160,7 +158,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           url={shareUrl}
           className="Demo__some-network__share-button"
         >
-          <LinkedinIcon size={size} />
+          <LinkedinIcon size={60} />
         </LinkedinShareButton>
       </div>
     );
@@ -172,7 +170,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
         //   media={`${String(window.location)}/${exampleImage}`}
           className="Demo__some-network__share-button"
         >
-          <PinterestIcon size={size} />
+          <PinterestIcon size={60} />
         </PinterestShareButton>
 
         {/* <div>
@@ -191,16 +189,16 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
         //   image={`${String(window.location)}/${exampleImage}`}
           className="Demo__some-network__share-button"
         >
-          <VKIcon size={size} />
+          <VKIcon size={60} />
         </VKShareButton>
 
-        {/* <div>
+        <div>
           <VKShareCount
             url={shareUrl}
             className="Demo__some-network__share-count"
           />
-        </div>*/}
-      </div> 
+        </div>
+      </div>
     );
   } else if (name === "ok") {
     return (
@@ -210,15 +208,15 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
         //   image={`${String(window.location)}/${exampleImage}`}
           className="Demo__some-network__share-button"
         >
-          <OKIcon size={size} />
+          <OKIcon size={60} />
         </OKShareButton>
 
-        {/* <div>
+        <div>
           <OKShareCount
             url={shareUrl}
             className="Demo__some-network__share-count"
           />
-        </div> */}
+        </div>
       </div>
     );
   } else if (name === "reddit") {
@@ -231,15 +229,15 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           windowHeight={460}
           className="Demo__some-network__share-button"
         >
-          <RedditIcon size={size} />
+          <RedditIcon size={60} />
         </RedditShareButton>
 
-        {/* <div>
+        <div>
           <RedditShareCount
             url={shareUrl}
             className="Demo__some-network__share-count"
           />
-        </div> */}
+        </div>
       </div>
     );
   } else if (name === "tumblr") {
@@ -250,7 +248,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           title={name}
           className="Demo__some-network__share-button"
         >
-          <TumblrIcon size={size} />
+          <TumblrIcon size={60} />
         </TumblrShareButton>
 
         {/* <div>
@@ -270,7 +268,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           description={shareUrl}
           className="Demo__some-network__share-button"
         >
-          <LivejournalIcon size={size} />
+          <LivejournalIcon size={60} />
         </LivejournalShareButton>
       </div>
     );
@@ -282,7 +280,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           title={name}
           className="Demo__some-network__share-button"
         >
-          <MailruIcon size={size} />
+          <MailruIcon size={60} />
         </MailruShareButton>
       </div>
     );
@@ -295,7 +293,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           body="body"
           className="Demo__some-network__share-button"
         >
-          <EmailIcon size={size} />
+          <EmailIcon size={60} />
         </EmailShareButton>
       </div>
     );
@@ -307,7 +305,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           title={name}
           className="Demo__some-network__share-button"
         >
-          <ViberIcon size={size} />
+          <ViberIcon size={60} />
         </ViberShareButton>
       </div>
     );
@@ -319,7 +317,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           quote={name}
           className="Demo__some-network__share-button"
         >
-          <WorkplaceIcon size={size} />
+          <WorkplaceIcon size={60} />
         </WorkplaceShareButton>
       </div>
     );
@@ -331,7 +329,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           title={name}
           className="Demo__some-network__share-button"
         >
-          <LineIcon size={size} />
+          <LineIcon size={60} />
         </LineShareButton>
       </div>
     );
@@ -344,7 +342,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
         //   image={`${String(window.location)}/${exampleImage}`}
           className="Demo__some-network__share-button"
         >
-          <WeiboIcon size={size} />
+          <WeiboIcon size={60} />
         </WeiboShareButton>
       </div>
     );
@@ -356,7 +354,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           title={name}
           className="Demo__some-network__share-button"
         >
-          <PocketIcon size={size} />
+          <PocketIcon size={60} />
         </PocketShareButton>
       </div>
     );
@@ -368,7 +366,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           title={name}
           className="Demo__some-network__share-button"
         >
-          <InstapaperIcon size={size} />
+          <InstapaperIcon size={60} />
         </InstapaperShareButton>
       </div>
     );
@@ -382,7 +380,7 @@ export const getShareIcon = (name, shareUrl, size = 64) => {
           windowHeight={460}
           className="Demo__some-network__share-button"
         >
-          <HatenaIcon size={size} />
+          <HatenaIcon size={60} />
         </HatenaShareButton>
 
         {/* <div>

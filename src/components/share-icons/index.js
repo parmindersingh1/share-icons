@@ -11,8 +11,6 @@ import { useState } from "preact/hooks";
 const placeholder = document.createElement("a");
 placeholder.class = "placeholder";
 
-import { Popover } from 'react-tiny-popover'
-
 const getFirstFourElements = (link) => {
   const allIcons = getAllIcons();
   const icons = allIcons.slice(0, 4);

@@ -23,13 +23,13 @@ const getFirstFourElements = (link) => {
 };
 
 const getRemainingElements = (link) => {
-  const allIcons = getAllIcons(20);
+  const allIcons = getAllIcons(30);
   const icons = allIcons.slice(4, allIcons.length);
   return icons.map((icon, i) => ({
     ...icon,
     id: i + 4,
     link: link,
-    icon: getShareIcon(icon.name, link, 25),
+    icon: getShareIcon(icon.name, link, 30),
   }));
 };
 
